@@ -39,11 +39,32 @@ function Airplane(name) {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- function Person() {
+class Person {
+  constructor(name,age,favoriteToy){
+    this.name=name;
+    this.age=age;
+    this.stomach=[];
+    this.favoriteToy=favoriteToy;
     
   }
- 
- 
+  eat(someFood){
+    if(this.stomach.length<10){
+      this.stomach.push(someFood);
+    }
+    else if(this.stomach.length>=10){
+      return (`${this.name} is full!`)
+    }
+  }
+  poop(){
+    this.stomach=[];
+  }
+  toString(){
+    return (`${this.name}, ${this.age}`);
+  }
+  play(){
+    return (`Playing with ${this.favoriteToy}`);
+} 
+}
 
   
   
@@ -63,9 +84,36 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ class Car {
+  constructor(model, mpg){
+    this.tank = 0;
+    this.odometer = 0;
+    this.model = model;
+    this.milesPerGallon= mpg;
   }
+
+  fill(gallons){
+    this.tank += gallons;
+  }
+
+  drive(distance, fuel){
+    this.odometer += distance;
+    this.tank -= distance / this.milesPerGallon;
+    
+    if (this.tank <= 0){
+      this.tank = 0
+      this.odometer -= 1
+      
+      console.log(this.odometer)
+      console.log(this.tank)
+      console.log (distance)
+      return `I ran out of fuel at ${this.odometer} miles`
+    }
+  }
+  
+
+}
+
   
   
   /*
@@ -75,18 +123,22 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
+ function Baby(name, age, favoriteToy) {
+   const baby = new Person("Lucy", 5, "trains")
+   return baby;
+ }
+ console.log(Baby().play());
+
+  
  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. The value of this inside a function is the object in a global scope.
+    2. Whenever a function is called by a preceding period the object before that period is "this"
+    3.  In the case of a constructur this refers to the object contained in the constructor.
+    4.  Call or Apply methods have the object containing "this" is actually defined.
   */
   
   
